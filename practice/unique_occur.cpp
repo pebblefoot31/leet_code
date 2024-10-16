@@ -1,49 +1,66 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 int main() {
 
 
-    std::vector<int> nums = {1,2,2,2,3,3,5,5,5,5,6,6};
+    //std::vector<int> nums = {1,2,2,2,3,3,3,3};
+    std::vector<int> nums = {-3,0,1,-3,1,1,1,-3,10,0};
+
     std::vector<int> occur;
     std::vector<int> considered;
+
     int count = 0;
     bool unique = true;
 
     std::vector<int>::iterator seeker = nums.begin();
 
-    for (int i = 0; i < nums.size(); i++) {
+    if (nums.size() > 0) {
 
-        seeker = copy.find(copy.begin(), copy.end(), nums[i]);
+        //loop through nums
+        for (int i = 0; i < nums.size(); i++) {
 
-        if (seeker == copy.end()) {
-            count = 0;
-            seeker = nums.begin();
+            //checking to see whether a particular value has already been reviewed or not
+            seeker = find(considered.begin(), considered.end(), nums[i]);
 
-            while (1) {
+            //not reviewed
+            if (seeker == considered.end()) {
 
-                seeker = nums.find(nums.begin(), nums.end(), nums[i]);
-                if (seeker != nums.end()) {
-                    count++;
-                } else {
-                    occur.push_back(count);
+                    //begin determining the amount of times it appears
+                    count = 0;
+                    for (int j = i; j < nums.size(); j++) {
+
+                        if (nums[j] == nums[i])
+                            count++;
+                    }
+
+                    //since it has now been considered
+                    considered.push_back(nums[i]);
+                
+
+                //checking if that count appears in vector of occurence vals
+                seeker = find(occur.begin(), occur.end(), count);
+
+                //found
+                if (seeker != occur.end()) {
+                    unique = false;
                     break;
+                } else { //otherwise we add this occurence value to vector
+                    occur.push_back(count);
                 }
             }
+
+            count = 0;
         }
-
-        seeker = occur.find(occur.begin(), occur.end(), count);
-
-        if (seeker != occur.end()) {
-            unique = false;
-            break;
-        }
-
-        count = 0;
     }
 
+    //result is printed
     if (unique) {
         std::cout << "this vector is unique!!" << std::endl;
+    } else {
+
+        std::cout << "not unique :(" << std::endl;
     }
 
     //cerate a vector that keeps track of the 
