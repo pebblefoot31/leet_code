@@ -14,12 +14,6 @@ int main() {
     map<int, int> magFreq;
     map<int, int> ranFreq;
     bool flag = true;
-   // set<char> rans(ransomNote.begin(), ransomNote.end());
-
-    // All letters in ransomNote must appear at least once in
-    // a multiple of the frequency that they appear in
-    // magazine (like the balloon problem)
-    // length of magazine must be greater than or equal to ransom note
 
     // Construct map of letter frequency for both strings
     if (magazine.size() >= ransomNote.size()) {
