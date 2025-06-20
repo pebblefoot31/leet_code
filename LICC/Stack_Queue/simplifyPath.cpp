@@ -4,20 +4,47 @@ using namespace std;
 
 int main () {
 
-    // iterate through the string in a loop an
+    string path = "/a//b////c/d//././/..";
+    string ans;
+    int dots = 0;
+    int slash = 0;
 
-    //treat it like a stack and keep track of how
-    //many . you encounter everytime it comes up
+    cout << path << endl;
+    for (int i = 0; i < path.size(); i++) {
 
-    //if i encounter a ..
-    // pop until the next /
-    // if i encounter a .
-    // pop
-    //if i encounter a // or //// or more
-    // pop until only 1 / remaining
-    // if the final character is a /
-    // pop it off
-    
+        if (!ans.empty() && (ans.back() == '/') && (path[i] == '/')) {
+                continue;
+        }
 
+        if (path[i] == '.') {
+            dots++;
+        } else {
+            if (dots == 1) {
+               continue; 
+            } else if (dots == 2) {
+                while (ans.size() > 1 && ans.back() != '/') {
+                    ans.pop_back();
+                }
+                if (ans.size() > 1 && ans.back() == '/') {
+                    ans.pop_back();
+                }
+            }
+            dots = 0;
+        }
+
+
+        if (dots == 0 && path[i] != '.') {
+            ans.push_back(path[i]);
+        }
+
+    }
+
+
+    //removing / at the end
+    while (ans.size() > 1 && ans.back() == '/') {
+        ans.pop_back();
+    }
+
+    cout << ans << endl;
     return 0;
 }
