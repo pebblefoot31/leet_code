@@ -5,33 +5,33 @@ using namespace std;
 
 int main () {
 
-    string path = "/a//b////c/d//././/..";
+    string path = "/.../a/../b/c/../d/./";
     istringstream ss(path);
-    string ans;
+    string ans = "";
     string seg;
     int dots = 0;
     int slash = 0;
 
     cout << path << endl;
+    ans.append("/");
 
     while (getline(ss, seg, '/')) {
-        cout << seg << endl;
 
-        if (!ans.empty()) {
-            if (seg == "..") {
-                ans.pop_back();
-            } else if (seg == ".") {
+        if (seg == "." || seg == "") {
                 continue;
-            } else {
-                ans.append(seg + "/");
+        } else if (seg == "..") {
+
+            if (ans.size() > 1 && ans.back() == '/')
+                ans.pop_back();
+
+            while (ans.size() > 1 && ans.back() != '/') {
+               ans.pop_back(); 
             }
         } else {
             ans.append(seg + "/");
-            ans.append(seg);
         }
 
     }
-
 
     //removing all / at the end
     while (ans.size() > 1 && ans.back() == '/') {
