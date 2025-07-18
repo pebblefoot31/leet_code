@@ -11,30 +11,19 @@ int main() {
     int boats = 0;
     bool paired = false;
 
-    while (people.size() > 1) {
-
-        for (int i = 0; i < people.size(); i++) {
-            cout << people[i] << " ";
-        }
-        cout << endl;
-
-        //make a pair successfully
-        if ((people[0] + people[people.size()-1]) <= limit) {
-            //remove the pair match
-            boats += 1;
-            people.pop_back();
-            people.erase(people.begin());
-
+    int i = 0;
+    int j = people.size()-1;
+    while (i <= j) {
+        if (people[i] + people[j] <= limit) {
+            i++;
+            j--;
         } else {
-            people.pop_back();
-            boats += 1;
+            j--;
         }
 
+        boats++;
     }
 
-    if (people.size() == 1) {
-        boats+=1;
-    }
     cout << boats << endl;
 
     return 0;
