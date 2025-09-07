@@ -4,6 +4,10 @@ using namespace std;
 
 int main() {
 
+    // Goal: find the subarray with the maximum sum
+    // DSA used: Array, Kadane's algorithm
+    // Complexity: O(n) because there is only one for-loop iterating the input
+
     //vector<int> nums = {5,4,-1,7,8};
     //vector<int> nums = {-2,1,-3,4,-1,2,1,-5,4};
     //vector<int> nums = {1};
